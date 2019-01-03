@@ -1,0 +1,27 @@
+{
+  "name": "skkuvr",
+  "version": "1.0.0",
+  "description": "SOSC VR Studio's web server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/S4nop/SKKU-VR-Web-System.git"
+  },
+  "keywords": [
+    "SKKUVR"
+  ],
+  "author": "Sanop (17 Ryu SungHee)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/S4nop/SKKU-VR-Web-System/issues"
+  },
+  "homepage": "https://github.com/S4nop/SKKU-VR-Web-System#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "qs": "^6.6.0"
+  }
+}
