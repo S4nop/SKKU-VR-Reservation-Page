@@ -74,6 +74,33 @@ function chkPW(pw){
   });
 }
 
+function delReserve(pw){
+  var json = new Object();
+  json.pw = pw;
+  json.reservNo = reservNo;
+  console.log(json.reservNo + " - " + json.pw);
+  $.ajax({
+    url: "http://localhost:3000/delreserv",
+    type: 'post',
+    dataType: 'json',
+    data: json,
+    success: function(data) {
+      console.log(data);
+      if(data == 'Wrong'){
+        alert('잘못된 패스워드 입니다');
+        console.log('Wrong pass');
+      }
+      else{
+        console.log('Right password on index.js');
+        location.replace('#main-page');
+      }
+    },
+    error: function() {
+      console.log("Error Occurred in AJAX");
+    }
+  });
+}
+
 function validPhone(pn) {
   var regEx = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
   if(!pn.match(regEx)) return false;  // Invalid format
@@ -193,6 +220,7 @@ function validuid(uid){
   });
 
   $(document).on('click', '.resDiv', function() {
+    $('#read_pw').val('');
     reservNo = $(this).attr('name');
     alert(reservNo);
     location.replace("#pw-page")
@@ -200,4 +228,8 @@ function validuid(uid){
 
   $(document).on('click', '#pwchk', function(){
     chkPW($('#read_pw').val());
+  })
+
+  $(document).on('click', '#remov', function(){
+    delReserve($('#read_pw').val());
   })

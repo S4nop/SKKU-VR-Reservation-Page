@@ -123,6 +123,51 @@ var app = http.createServer(function(request,response){
         }
       });
     }
+
+    if(path == '/delreserv'){
+      var tmpSplit, splitData, tmpDate;
+      var json = new Object();
+      var body = ''
+      request.on('data', function(data){
+        body += data;
+        if(body.length > 1e6) request.connection.destroy();
+      });
+      request.on('end', function(){
+        queryData = new Object(qs.parse(body));
+        tmpSplit = queryData.reservNo.split('$')
+        tmpSplit = tmpSplit[0].split('/');
+        tmpDate = getWeekStart(0, new Date(tmpSplit[0], 1*tmpSplit[1] - 1, tmpSplit[2]));
+        var spliter = tmpDate.getFullYear().toString() + (1*tmpDate.getMonth() + 1) + tmpDate.getDate();
+        console.log(JSON.stringify(queryData) + " spliter: " + spliter);
+        try {
+          fData = fs.readFileSync(spliter + ".dat", 'utf8');
+          tmpSplit = fData.split("\r\n");
+          for(var i = 0; i < tmpSplit.length; i++){
+            if(tmpSplit[i].startsWith(queryData.reservNo)){
+              splitData = tmpSplit[i].split('$');
+              if(splitData[7] == queryData.pw){
+                tmpSplit.splice(i, 1);
+                fs.writeFile(spliter + ".dat", tmpSplit.join('\r\n'), 'utf8', function (err) {
+                  if (err) throw err;
+                  console.log('File ' + spliter + ' is created');
+                });
+                json.result = 'Success';
+                response.writeHead(200, ajaxHeaders);
+                response.end(JSON.stringify(json)); //TOFIX
+              }
+              else{
+                response.writeHead(200, ajaxHeaders);
+                response.end("Wrong request");
+              }
+            }
+          }
+        } catch (e) {
+          console.log('/delreserv : Unknown request');
+          return;
+        }
+      });
+    }
+
     if(path == '/favicon.ico'){
       response.writeHead(404);
       response.end();
