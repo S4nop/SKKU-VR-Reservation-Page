@@ -82,6 +82,47 @@ var app = http.createServer(function(request,response){
 
 
     }
+
+    if(path == '/readreserv'){
+      var tmpSplit, splitData, tmpDate;
+      var json = new Object();
+      var body = ''
+      request.on('data', function(data){
+        body += data;
+        if(body.length > 1e6) request.connection.destroy();
+      });
+      request.on('end', function(){
+        queryData = new Object(qs.parse(body));
+        tmpSplit = queryData.reservNo.split('$')
+        tmpSplit = tmpSplit[0].split('/');
+        tmpDate = getWeekStart(0, new Date(tmpSplit[0], 1*tmpSplit[1] - 1, tmpSplit[2]));
+        var spliter = tmpDate.getFullYear().toString() + (1*tmpDate.getMonth() + 1) + tmpDate.getDate();
+        console.log(JSON.stringify(queryData) + " spliter: " + spliter);
+        try {
+          fData = fs.readFileSync(spliter + ".dat", 'utf8');
+          tmpSplit = fData.split("\r\n");
+          for(var i = 0; i < tmpSplit.length; i++){
+            if(tmpSplit[i].startsWith(queryData.reservNo)){
+              splitData = tmpSplit[i].split('$');
+              if(splitData[7] == queryData.pw){
+                json.name = splitData[2];
+                json.num = splitData[5];
+                json.time = splitData[0] + '-' + splitData[1];
+                response.writeHead(200, ajaxHeaders);
+                response.end(JSON.stringify(json));
+              }
+              else{
+                response.writeHead(200, ajaxHeaders);
+                response.end("Wrong");
+              }
+            }
+          }
+        } catch (e) {
+          console.log('/readreserv : Unknown request');
+          return;
+        }
+      });
+    }
     if(path == '/favicon.ico'){
       response.writeHead(404);
       response.end();
@@ -131,9 +172,7 @@ function getTT(stDay){
       tmpData = resvList[i].split('$')
       tmpObj.date = tmpData[0];
       tmpObj.time = tmpData[1]
-      tmpObj.name = tmpData[2];
       tmpObj.uid = tmpData[4];
-      tmpObj.num = tmpData[5];
       tmpObj.pw = tmpData[7];
 
       console.log('rsvlst: ' + resvList[i] + '\n' + JSON.stringify(tmpObj) + '\n');

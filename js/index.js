@@ -1,5 +1,6 @@
 var pmWeek = 0;
 var thisDate;
+var reservNo;
 function getTimeTable(err) {
   $.ajax({
     url: "http://localhost:3000/tdData?pmw=" + pmWeek,
@@ -11,7 +12,7 @@ function getTimeTable(err) {
       $('#table td').not('.closed').not('.closed div').html('');
       var dArray = data;
       setWeek(new Date(dArray[dArray.length - 1]));
-      for(var i = 0; i < dArray.length - 1; i++){
+      for(var i = 1; i < dArray.length - 1; i++){
         console.log(data[i]);
         fillTT(data[i]);
       }
@@ -35,12 +36,42 @@ function setWeek(fDay){
 
 function fillTT(Obj){
   var resvList, tmpTime, tmpDate;
-    if(Obj.time == '' || typeof(Obj.time) == 'undefined') return;
+    if(Obj.date == '' || typeof(Obj.date) == 'undefined') return;
     tmpDate = new Date(Obj.date);
     $('#' + Obj.time + ' .week' + tmpDate.getDay()).addClass('reserved');
     console.log('#' + Obj.time + ' .week' + tmpDate.getDay() + '--' + Obj.uid);
-    $('#' + Obj.time + ' .week' + tmpDate.getDay()).html('<div>' + Obj.name + '<br>' + Obj.uid.slice(-2) + '</div>');
+    $('#' + Obj.time + ' .week' + tmpDate.getDay()).html('<div class="resDiv" name="' + Obj.date + '$' + Obj.time +'">' + 'reserved' + '<br>' + Obj.uid.slice(-4) + '</div>');
     return;
+}
+
+function chkPW(pw){
+  var json = new Object();
+  json.pw = pw;
+  json.reservNo = reservNo;
+  console.log(json.reservNo + " - " + json.pw);
+  $.ajax({
+    url: "http://localhost:3000/readreserv",
+    type: 'post',
+    dataType: 'json',
+    data: json,
+    success: function(data) {
+      console.log(data);
+      if(data == 'Wrong'){
+        alert('잘못된 패스워드 입니다');
+      }
+      else{
+        json = data;
+        $('#rname').val(json.name);
+        $('#rnum').val(json.num);
+        $('#rtime').val(json.time);
+        console.log('Right password');
+        location.replace('#read-page')
+      }
+    },
+    error: function() {
+      console.log("Error Occurred in AJAX");
+    }
+  });
 }
 
 function validPhone(pn) {
@@ -161,13 +192,12 @@ function validuid(uid){
     });
   });
 
-  $(document).on('click', 'li', function() {
-    $('#rtitle').val($(this).find('h3').html());
-    $('#rbody').val($(this).find('p[class="mbody"]').html());
-    $('#rwriter').val($(this).find('[class*="ui-li-aside"]').html());
-    var img = $(this).find('img').attr("src");
-    $('#rimg').attr("src", $(this).find('img').attr("src"));
-    location.replace("#read-page")
-    // 클릭한 게시글 내용을 그대로 게시글 조회 페이지에 입력
-    // 게시글 조회 페이지 이동
+  $(document).on('click', '.resDiv', function() {
+    reservNo = $(this).attr('name');
+    alert(reservNo);
+    location.replace("#pw-page")
   });
+
+  $(document).on('click', '#pwchk', function(){
+    chkPW($('#read_pw').val());
+  })
