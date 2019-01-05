@@ -27,11 +27,13 @@ function getTimeTable(err) {
 function setWeek(fDay){
   weekDay = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
   thisDate = new Array();
+  $('.Month').html('<h2>' + fDay.getFullYear() + '/' + (fDay.getMonth() + 1 < 10 ? '0' + (fDay.getMonth() + 1) : (fDay.getMonth() + 1)) + '</h2>');
   for(var i = 0; i < 5; i++){
     $('#w' + i).html(weekDay[i] + '<br>' + (fDay.getMonth() + 1) + '/' + fDay.getDate());
     thisDate.push((fDay.getMonth() + 1) + '-' + fDay.getDate());
     fDay.setDate(fDay.getDate() + 1);
   }
+
 }
 
 function fillTT(Obj){
@@ -55,8 +57,8 @@ function chkPW(pw){
     dataType: 'json',
     data: json,
     success: function(data) {
-      console.log(data);
-      if(data == 'Wrong'){
+      console.log(data.result);
+      if(data.result == 'Wrong'){
         alert('잘못된 패스워드 입니다');
       }
       else{
@@ -85,8 +87,8 @@ function delReserve(pw){
     dataType: 'json',
     data: json,
     success: function(data) {
-      console.log(data);
-      if(data == 'Wrong'){
+      console.log(data.result);
+      if(data.result == 'Wrong'){
         alert('잘못된 패스워드 입니다');
         console.log('Wrong pass');
       }
@@ -186,7 +188,7 @@ function validuid(uid){
     	time.push($(this).val());
     });
     json.times = JSON.stringify(time);
-
+    console.log('Send Data: ' + JSON.stringify(json));
     if(!validPhone(json.phone) || !validuid(json.uid)){
       alert('정확한 정보를 입력해 주세요');
       return;
@@ -198,7 +200,7 @@ function validuid(uid){
       data: json,
       dataType: 'text',
       success: function(data) {
-        if(data !== ''){
+        if(data !== 'Success'){
           alert('예약 시간이 중복되었습니다. [' + data + ']');
           return;
         }
@@ -222,7 +224,7 @@ function validuid(uid){
   $(document).on('click', '.resDiv', function() {
     $('#read_pw').val('');
     reservNo = $(this).attr('name');
-    alert(reservNo);
+    //alert(reservNo);
     location.replace("#pw-page")
   });
 
@@ -233,3 +235,9 @@ function validuid(uid){
   $(document).on('click', '#remov', function(){
     delReserve($('#read_pw').val());
   })
+
+  $(document).on('keydown', '#read_pw', function(){
+    if (window.event.keyCode == 13) {
+      chkPW($('#read_pw').val());
+    }
+  });
