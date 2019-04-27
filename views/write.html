@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Programming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+</head>
+
+<body>
+
+    <div id="write-page" data-role="page">
+        <div data-role="header">
+            <h1>VR: Reservation</h1>
+            <a href="/" data-role="button">Back</a>
+
+            <!-- 중앙에 '게시글 작성' 타이틀 -->
+            <!-- 좌측에 '뒤로 가기' 버튼 -->
+        </div>
+        <div data-role="content">
+            <label>성명(대표자)
+            <input type="text" name="name" id='name'>
+          </label>
+            <label>학과
+            <input type="text" name="depart" id='depart'>
+          </label>
+            <label>학번
+            <input type="text" name="uid" id='uid'>
+          </label>
+            <label>연락처
+            <input type="text" name="phone" id='phone'>
+          </label>
+            <form>
+                <label>인원(본인 포함)
+            <select name="num" id="num">
+              <option value="1">1명</option>
+              <option value="2">2명</option>
+              <option value="3">3명</option>
+              <option value="4">4명</option>
+             </select>
+          </label>
+
+                <label>날짜 선택
+            <input type="text" id="date" data-role="date" style="position:relative; z-index:1;" readonly="readonly">
+          </label>
+
+                <fieldset data-role="controlgroup" multiple="multiple" style="position:relative; z-index:0;">
+                    <legend>시간 선택(최대 4개 선택 가능)</legend>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time1" value="1000" />
+                    <label for="time1">10:00 ~ 10:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time2" value="1030" />
+                    <label for="time2">10:30 ~ 11:00</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time3" value="1100" />
+                    <label for="time3">11:00 ~ 11:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time4" value="1130" />
+                    <label for="time4">11:30 ~ 12:00</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time5" value="0100" />
+                    <label for="time5">01:00 ~ 01:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time6" value="0130" />
+                    <label for="time6">01:30 ~ 02:00</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time7" value="0200" />
+                    <label for="time7">02:00 ~ 02:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time8" value="0230" />
+                    <label for="time8">02:30 ~ 03:00</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time9" value="0300" />
+                    <label for="time9">03:00 ~ 03:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time10" value="0330" />
+                    <label for="time10">03:30 ~ 04:00</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time11" value="0400" />
+                    <label for="time11">04:00 ~ 04:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time12" value="0430" />
+                    <label for="time12">04:30 ~ 05:00</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time13" value="0500" />
+                    <label for="time13">05:00 ~ 05:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time14" value="0530" />
+                    <label for="time14">05:30 ~ 06:00</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time15" value="0700" />
+                    <label for="time15">07:00 ~ 07:30</label>
+                    <input type="checkbox" class="chkTime" name="ctime" id="time16" value="0730" />
+                    <label for="time16">07:30 ~ 08:00</label>
+                </fieldset>
+
+                <label>비밀번호(예약을 취소, 변경할 때 사용됩니다)
+            <input type="password" name="password" id='pw'>
+          </label>
+                <a href="#" id="write" data-role="button">예약</a>
+                <!-- 제목 입력 공간 -->
+                <!-- 내용 입력 공간 (여러 줄 입력 가능) -->
+                <!-- 이미지 선택 공간 (라디오 버튼) -->
+                <!-- 작성자 입력 공간 -->
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <h4>By Sanop(rshtiger@g.skku.edu)</h4>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="/static/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<style>
+    tr,
+    th,
+    td {
+        border: 1px solid #d6d6d6;
+    }
+    
+    table thead th {
+        text-align: center;
+        width: 10%;
+    }
+    
+    .ui-free {
+        display: inline-block;
+        float: none;
+        margin: 0;
+    }
+    
+    .closed {
+        background-color: #E9E9E9;
+    }
+    
+    .reserved {
+        background-color: #EDEDED;
+    }
+    
+    .reserved div,
+    .closed div,
+    th div {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        line-height: 1.0em;
+    }
+    
+    .reserved div {
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
+        cursor: auto;
+        background-color: #fff;
+    }
+</style>
+
+</html>

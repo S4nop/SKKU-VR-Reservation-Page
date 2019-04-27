@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Programming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+</head>
+
+<body>
+
+    <div id="main-page" data-role="page" align="center">
+        <div data-role="header">
+            <h1>SOSC VR: Timetable</h1>
+            <a href="/write" data-role="button" class="ui-btn-right">예약하기</a>
+            <!-- 중앙에 '게시판' 타이틀 -->
+            <!-- 우측에 '게시글 작성' 버튼 -->
+        </div>
+        <div data-role="content" class="ui-free" align="center">
+            <!-- List View -->
+            <div class="Month">
+                <h2>2019/01</h2>
+            </div>
+            <span id='lweek' style="float:left">&nbsp <a href='#'>&lt- Last week</a></span>
+            <span id='nweek' style="float:right"><a href='#'>Next week -&gt</a> &nbsp </span> <br>
+            <table data-role="table" id="table" data-mode="column" class="ui-responsive ui-free">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:8%"> </th>
+                        <th scope="col">
+                            <div id="w0" style="text-align:center">
+                                Mon
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div id="w1" style="text-align:center">
+                                Tue
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div id="w2" style="text-align:center">
+                                Wed
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div id="w3" style="text-align:center">
+                                Thu
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div id="w4" style="text-align:center">
+                                Fri
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="1000">
+                        <th>
+                            <div style="text-align:center">10:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="1030">
+                        <th>
+                            <div style="text-align:center">10:30</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="1100">
+                        <th>
+                            <div style="text-align:center">11:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="1130">
+                        <th>
+                            <div style="text-align:center">11:30</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="1200">
+                        <th>
+                            <div style="text-align:center">12:00</div>
+                        </th>
+                        <td class='closed' colspan=5>
+                            <div style='text-align:center'>
+                                Lunch Time
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="1230">
+                        <th>
+                            <div style="text-align:center">12:30</div>
+                        </th>
+                        <td class='closed' colspan=5>
+                            <div style='text-align:center'>
+                                Lunch Time
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="0100">
+                        <th>
+                            <div style="text-align:center">1:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0130">
+                        <th>
+                            <div style="text-align:center">1:30</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0200">
+                        <th>
+                            <div style="text-align:center">2:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0230">
+                        <th>
+                            <div style="text-align:center">2:30</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0300">
+                        <th>
+                            <div style="text-align:center">3:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0330">
+                        <th>
+                            <div style="text-align:center">3:30</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0400">
+                        <th>
+                            <div style="text-align:center">4:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0430">
+                        <th>
+                            <div style="text-align:center">4:30</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0500">
+                        <th>
+                            <div style="text-align:center">5:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0530">
+                        <th>
+                            <div style="text-align:center">5:30</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0600">
+                        <th>
+                            <div style="text-align:center">6:00</div>
+                        </th>
+                        <td class='closed' colspan=5>
+                            <div style='text-align:center'>
+                                Dinner Time
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="0630">
+                        <th>
+                            <div style="text-align:center">6:30</div>
+                        </th>
+                        <td class='closed' colspan=5>
+                            <div style='text-align:center'>
+                                Dinner Time
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="0700">
+                        <th>
+                            <div style="text-align:center">7:00</div>
+                        </th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                    <tr id="0730">
+                        <th>
+                            <div style="text-align:center">7:30</th>
+                        <td class='week1'></td>
+                        <td class='week2'></td>
+                        <td class='week3'></td>
+                        <td class='week4'></td>
+                        <td class='week5'></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <h4>By Sanop(rshtiger@g.skku.edu)</h4>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="/static/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<style>
+    tr,
+    th,
+    td {
+        border: 1px solid #d6d6d6;
+    }
+    
+    table thead th {
+        text-align: center;
+        width: 10%;
+    }
+    
+    .ui-free {
+        display: inline-block;
+        float: none;
+        margin: 0;
+    }
+    
+    .closed {
+        background-color: #E9E9E9;
+    }
+    
+    .reserved {
+        background-color: #EDEDED;
+    }
+    
+    .reserved div,
+    .closed div,
+    th div {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        line-height: 1.0em;
+    }
+    
+    .reserved div {
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
+        cursor: auto;
+        background-color: #fff;
+    }
+</style>
+
+</html>
