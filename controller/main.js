@@ -12,7 +12,6 @@ module.exports = {
     var fullData = '';
     var output = new Object(); output.status = true;
     var time = req.body['times'];
-
     var spliter = parse_Spliter(req.body['date']);
 
     try {
@@ -142,7 +141,7 @@ function getSpliter(tmpDate) {
   var tmpMonth, tmpDay;
   tmpMonth = (1 * tmpDate.getMonth() + 1);
   tmpDay = tmpDate.getDate();
-  return tmpDate.getFullYear().toString() + (tmpMonth < 10 ? '0' + tmpMonth : tmpMonth) + (tmpDay < 10 ? '0' + tmpDay : tmpDay);
+  return "databases/" + tmpDate.getFullYear().toString() + (tmpMonth < 10 ? '0' + tmpMonth : tmpMonth) + (tmpDay < 10 ? '0' + tmpDay : tmpDay);
 }
 
 function parse_Spliter(date) {

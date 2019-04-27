@@ -10,11 +10,11 @@ module.exports = function(app, express, fs) {
   });
 
   app.post('/cmtResv', function(req, res) {
-    ctrl.cmtResv(req. res);
+    ctrl.cmtResv(req, res);
   });
 
   app.get('/writeResv', function(req, res) {
-    res.render('write');
+    res.render('writeResv');
   });
 
   app.post('/chkResv', async function(req, res) {
