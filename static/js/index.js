@@ -62,7 +62,7 @@ function delResv(pw, resvname) {
         dataType: 'json',
         data: json,
         success: function(data) {
-            if (data.result) {
+            if (!data.result) {
                 alert('잘못된 패스워드 입니다');
             } else {
                 location.replace('/');

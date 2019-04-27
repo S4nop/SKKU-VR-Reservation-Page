@@ -1,10 +1,10 @@
 const fs = require('fs');
 
 module.exports = {
-  loadResv : function (req, res) {
+  loadResv : async function (req, res) {
     date = getWeekStart(req.body['pmw']);
     resvList = getTT(date);
-    resvList.push(date);;
+    resvList.push(date);
     res.json(resvList);
     return;
   },
@@ -106,12 +106,8 @@ function getTT(stDay) {
         fData = fs.readFileSync(spliter + ".dat", 'utf8');
         resvList = fData.split("\n");
         for (var i = 0; i < resvList.length; i++) {
-            tmpData = resvList[i].split('$')
-            tmpObj.date = tmpData[0];
-            tmpObj.time = tmpData[1]
-            tmpObj.uid = tmpData[4];
-            tmpObj.pw = tmpData[7];
-            resvObj.push(tmpObj);
+          tmpData = resvList[i].split('$')
+          resvObj.push(resvData(tmpData));
         }
     } catch (e) {
         fs.writeFileSync(spliter + ".dat", '', 'utf8', function(err) {
@@ -121,6 +117,14 @@ function getTT(stDay) {
     return resvObj;
 }
 
+function resvData(tmp)
+{
+  return {
+    date : tmp[0],
+    time : tmp[1],
+    uid : tmp[4]
+  };
+}
 
 function getWeekStart(pmWeek, day) {
   var today;
