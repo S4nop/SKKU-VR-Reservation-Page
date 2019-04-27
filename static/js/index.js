@@ -3,9 +3,12 @@ var thisDate;
 var reservNo;
 function getTimeTable(err) {
   $.ajax({
-    url: "/tdData?pmw=" + pmWeek,
+    url: '/tdData',
     type: 'post',
     dataType: 'json',
+    data: {
+      pmw: pmWeek
+    },
     success: function(data) {
       console.log(data);
       $('#table td').not('.closed').not('.closed div').removeClass('reserved');

@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Web Programming</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-</head>
-
-<body>
-
+<% include ./header.ejs %>
     <div id="write-page" data-role="page">
         <div data-role="header">
             <h1>VR: Reservation</h1>
@@ -94,57 +83,4 @@
             <h4>By Sanop(rshtiger@g.skku.edu)</h4>
         </div>
     </div>
-</body>
-
-<script type="text/javascript" src="/static/js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery-ui-1.10.0.custom.min.js"></script>
-<script type="text/javascript" src="/static/js/index.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-<style>
-    tr,
-    th,
-    td {
-        border: 1px solid #d6d6d6;
-    }
-    
-    table thead th {
-        text-align: center;
-        width: 10%;
-    }
-    
-    .ui-free {
-        display: inline-block;
-        float: none;
-        margin: 0;
-    }
-    
-    .closed {
-        background-color: #E9E9E9;
-    }
-    
-    .reserved {
-        background-color: #EDEDED;
-    }
-    
-    .reserved div,
-    .closed div,
-    th div {
-        text-align: center;
-        margin: 0;
-        padding: 0;
-        line-height: 1.0em;
-    }
-    
-    .reserved div {
-        font-size: 12px;
-        font-weight: bold;
-    }
-    
-    .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
-        cursor: auto;
-        background-color: #fff;
-    }
-</style>
-
-</html>
+    <% include ./footer.ejs %>

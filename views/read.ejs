@@ -1,0 +1,31 @@
+<% include ./header.ejs %>
+    <div id="read-page" data-role="page">
+        <div data-role="header">
+            <h1>VR: Reservation Confirmation</h1>
+            <a href="#main-page" data-role="button">Back</a>
+
+            <!-- 중앙에 '게시글 조회' 타이틀 -->
+            <!-- 좌측에 '뒤로 가기' 버튼 -->
+        </div>
+        <div data-role="content">
+            <label>성명(대표자)
+          <input type="text" name="rname" id='rname' readonly>
+        </label>
+            <label>인원
+          <input type="text" name="rnum" id='rnum' readonly>
+        </label>
+            <label>시간
+          <input type="text" name="rtime" id='rtime' readonly>
+        </label>
+
+            <a href="#" id="remov" data-role="button">삭제</a>
+        </div>
+        <!-- 제목 출력 (읽기만 가능) -->
+        <!-- 내용 출력 (읽기만 가능) -->
+        <!-- 이미지 출력 -->
+        <!-- 작성자 출력 (읽기만 가능) -->
+        <div data-role="footer" data-position="fixed">
+            <h4>By Sanop(rshtiger@g.skku.edu)</h4>
+        </div>
+    </div>
+    <% include ./footer.ejs %>
