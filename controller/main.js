@@ -1,14 +1,14 @@
 const fs = require('fs');
 
 module.exports = {
-  getTdData : function (req, res) {
+  loadResv : function (req, res) {
     date = getWeekStart(req.body['pmw']);
     resvList = getTT(date);
     resvList.push(date);;
     res.json(resvList);
     return;
   },
-  reservFin: function(req, res) {
+  cmtResv: function(req, res) {
     var fullData = '';
     var output = new Object(); output.status = true;
     var time = req.body['times'];
@@ -53,6 +53,36 @@ module.exports = {
       }
       res.json(output);
     }
+  },
+  chkResv: function(req, res) {
+    var tmpSplit, splitData;
+    var json = new Object();
+    var spliter = parse_Spliter(req.body['resvname'].split('$')[0]);
+
+    try {
+      fData = fs.readFileSync(spliter + ".dat", 'utf8');
+        
+      tmpSplit = fData.split("\n");
+
+      for (var i = 0; i < tmpSplit.length; i++) {
+        if (tmpSplit[i].startsWith(req.body['resvname'])) {
+          
+          splitData = tmpSplit[i].split('$');
+          if (splitData[7] == req.body['pw']) {
+            json.name = splitData[2];
+            json.num = splitData[5];
+            json.time = splitData[0] + '-' + splitData[1];
+            json.result = true;
+          } else {
+            json.result = false;
+          }
+          res.json(json);
+          return;
+        }
+      }
+    } catch (e) {
+      res.status(500).send({ error: 'Something failed!' });
+    }
   }
 }
 
@@ -83,7 +113,6 @@ function getTT(stDay) {
 
 
 function getWeekStart(pmWeek, day) {
-  console.log(pmWeek);
   var today;
   var dd, mm, yyyy, wd;
   var date = new Object();

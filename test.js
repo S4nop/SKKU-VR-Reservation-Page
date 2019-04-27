@@ -1,13 +1,9 @@
-// 여기까지 작업 끝
+
     if (path == '/readreserv' || path == '/delreserv') {
         var tmpSplit, splitData, tmpDate;
         var json = new Object();
         var body = ''
-        console.log(' [' + path + '] requested');
-        request.on('data', function(data) {
-            body += data;
-            if (body.length > 1e6) request.connection.destroy();
-        });
+
         console.log(' [' + path + '] : Data posted : ' + body);
         request.on('end', function() {
             queryData = new Object(qs.parse(body));
@@ -61,5 +57,3 @@
         return;
     }
 });
-
-app.listen(3000);
