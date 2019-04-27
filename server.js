@@ -15,8 +15,6 @@ const server = app.listen(PORT, function(){
  console.log("Express server has started on port 3000")
 });
 
-app.use(express.static("static"));
-
 app.use(bodyParser.json( { limit: "10mb"}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -26,4 +24,4 @@ app.use(session({
  saveUninitialized: true
 }));
 
-const router = require("./router/main")(app, fs);
+const router = require("./router/main")(app, express, fs);

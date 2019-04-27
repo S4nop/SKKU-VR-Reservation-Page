@@ -1,4 +1,4 @@
-module.exports = function(app)
+module.exports = function(app, express)
 {
      app.get('/',function(req, res){
         res.render('index.html')
@@ -6,4 +6,6 @@ module.exports = function(app)
      app.get('/tdData',function(req, res){
         res.render('about.html');
     });
+
+    app.use("/static", express.static("static"));
 }
