@@ -3,7 +3,7 @@ var thisDate;
 var reservNo;
 function getTimeTable(err) {
   $.ajax({
-    url: "http://localhost:3000/tdData?pmw=" + pmWeek,
+    url: "/tdData?pmw=" + pmWeek,
     type: 'post',
     dataType: 'json',
     success: function(data) {
@@ -52,7 +52,7 @@ function chkPW(pw){
   json.reservNo = reservNo;
   console.log(json.reservNo + " - " + json.pw);
   $.ajax({
-    url: "http://localhost:3000/readreserv",
+    url: "/readreserv",
     type: 'post',
     dataType: 'json',
     data: json,
@@ -82,7 +82,7 @@ function delReserve(pw){
   json.reservNo = reservNo;
   console.log(json.reservNo + " - " + json.pw);
   $.ajax({
-    url: "http://localhost:3000/delreserv",
+    url: "/delreserv",
     type: 'post',
     dataType: 'json',
     data: json,
@@ -195,7 +195,7 @@ function validuid(uid){
     }
 
     $.ajax({
-      url: "http://localhost:3000/reservfin",
+      url: "/reservfin",
       type: 'post',
       data: json,
       dataType: 'text',

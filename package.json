@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/S4nop/SKKU-VR-Web-System#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
+    "eslint": "^5.16.0",
     "express": "^4.16.4",
-    "qs": "^6.6.0"
+    "express-session": "^1.16.1",
+    "qs": "^6.7.0"
   }
 }
