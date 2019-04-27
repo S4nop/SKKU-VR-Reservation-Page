@@ -7,6 +7,9 @@ module.exports = function(app, express, fs) {
   app.post('/tdData', function(req, res) {
     ctrl.getTdData(req, res);
   });
+  app.post('/reservFin', function(req, res) {
+    ctrl.reservFin(req, res);
+  });
   app.get('/write', function(req, res) {
     res.render('write');
   });

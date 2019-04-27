@@ -16,7 +16,7 @@ const server = app.listen(PORT, function() {
 });
 
 app.use(bodyParser.json({ limit: "10mb" }));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: "@#@$MYSIGN#@$#$",

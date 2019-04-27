@@ -7,12 +7,56 @@ module.exports = {
     resvList.push(date);;
     res.json(resvList);
     return;
+  },
+  reservFin: function(req, res) {
+    var fullData = '';
+    var output = new Object(); output.status = true;
+    var time = req.body['times'];
+
+    var spliter = parse_Spliter(req.body['date']);
+
+    try {
+      fData = fs.readFileSync(spliter + ".dat", 'utf8');
+    } catch (e) {
+      fs.writeFile(spliter + ".dat", input, 'utf8', function(err) {
+        if (err)
+          res.status(500).send({ error: 'Something failed!' });
+      });
+    }
+
+    for (var i = 0; i < time.length; i++) {
+      var input = '\n' +
+          req.body['date'] + '$' + 
+          time[i] + '$' + 
+          req.body['name'] + '$' +
+          req.body['depart'] + '$' +
+          req.body['uid'] + '$' +
+          req.body['num'] + '$' +
+          req.body['phone'] + '$' +
+          req.body['pw'];
+
+      if (fData.indexOf(req.body['date'] + '$' + time[i]) !== -1) {
+        // 중복    
+        output.status = false;
+        output.data = time[i];
+        break;
+      }
+
+      fullData = fullData + input;
+    }
+
+    if (output.status) {
+      try {
+        fs.appendFileSync(spliter + ".dat", fullData, 'utf8');
+      } catch (e) {
+        res.status(500).send({ error: 'Something failed!' });
+      }
+      res.json(output);
+    }
   }
 }
 
-
 function getTT(stDay) {
-  
     var spliter = getSpliter(stDay);
     var resvObj = new Array();
     var tmpObj = new Object();
@@ -59,4 +103,10 @@ function getSpliter(tmpDate) {
   tmpMonth = (1 * tmpDate.getMonth() + 1);
   tmpDay = tmpDate.getDate();
   return tmpDate.getFullYear().toString() + (tmpMonth < 10 ? '0' + tmpMonth : tmpMonth) + (tmpDay < 10 ? '0' + tmpDay : tmpDay);
+}
+
+function parse_Spliter(date) {
+  var tmpSplit = date.split('/');
+  tmpDate = getWeekStart(0, new Date(tmpSplit[0], (1 * tmpSplit[1] - 1), tmpSplit[2]));
+  return getSpliter(tmpDate);
 }

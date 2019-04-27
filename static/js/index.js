@@ -190,20 +190,23 @@ function validuid(uid){
     $(".chkTime:checked").each(function() {
     	time.push($(this).val());
     });
-    json.times = JSON.stringify(time);
+    json.times = time;
+    
     console.log('Send Data: ' + JSON.stringify(json));
+
+    console.log(json);
     if(!validPhone(json.phone) || !validuid(json.uid)){
       alert('정확한 정보를 입력해 주세요');
       return;
     }
 
     $.ajax({
-      url: "/reservfin",
+      url: "/reservFin",
       type: 'post',
       data: json,
       dataType: 'text',
       success: function(data) {
-        if(data !== 'Success'){
+        if(data.status){
           alert('예약 시간이 중복되었습니다. [' + data + ']');
           return;
         }
