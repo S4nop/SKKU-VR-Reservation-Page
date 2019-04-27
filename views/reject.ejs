@@ -1,5 +1,5 @@
 <% include ./header.ejs %>
-    <div id='pw-page' data-role="page">
+    <div id="read-page" data-role="page">
         <div data-role="header">
             <h1>VR: Reservation Confirmation</h1>
             <a href="/" data-role="button">Back</a>
@@ -7,16 +7,10 @@
             <!-- 중앙에 '게시글 조회' 타이틀 -->
             <!-- 좌측에 '뒤로 가기' 버튼 -->
         </div>
-        <form action="/chkResv" method="POST">
         <div data-role="content">
-            <label style="margin-top:180px">예약 시 입력한 비밀번호를 입력해 주세요
-            <input type="hidden" name="resvname" id="resvname" value="<%=resvname%>" />
-            <input type="password" name="pw" id='read_pw'>
-          </label>
-
-            <input type="submit" id="pwchk" data-role="button" value="확인"/>
+            <label>비밀번호가 틀렸습니다.</label>
+            <button data-role="button" onclick="history.back();">뒤로가기</button>
         </div>
-        </form>
         <div data-role="footer" data-position="fixed">
             <h4>By Sanop(rshtiger@g.skku.edu)</h4>
         </div>

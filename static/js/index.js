@@ -1,6 +1,6 @@
 var pmWeek = 0;
 var thisDate;
-var reservNo;
+var resvname;
 
 function getTimeTable(err) {
     $.ajax({
@@ -50,51 +50,21 @@ function fillTT(Obj) {
     return;
 }
 
-function chkPW(pw, resvname) {
+
+function delResv(pw, resvname) {
     var json = new Object();
     json.pw = pw;
     json.resvname = resvname;
     
     $.ajax({
-        url: "/chkResv",
+        url: "/delResv",
         type: 'post',
         dataType: 'json',
         data: json,
         success: function(data) {
-            if (!data.result) {
+            if (data.result) {
                 alert('잘못된 패스워드 입니다');
             } else {
-                json = data;
-                $('#rname').val(json.name);
-                $('#rnum').val(json.num);
-                $('#rtime').val(json.time);
-                
-                location.replace('/readResv')
-            }
-        },
-        error: function() {
-            console.log("Error Occurred in AJAX");
-        }
-    });
-}
-
-function delReserve(pw) {
-    var json = new Object();
-    json.pw = pw;
-    json.reservNo = reservNo;
-    console.log(json.reservNo + " - " + json.pw);
-    $.ajax({
-        url: "/delreserv",
-        type: 'post',
-        dataType: 'json',
-        data: json,
-        success: function(data) {
-            console.log(data.result);
-            if (data.result == 'Wrong') {
-                alert('잘못된 패스워드 입니다');
-                console.log('Wrong pass');
-            } else {
-                console.log('Right password on index.js');
                 location.replace('/');
             }
         },
@@ -227,16 +197,6 @@ $(document).on('click', '.resDiv', function() {
     location.replace("/chkResv/" + encodeURIComponent($(this).attr('name')));
 });
 
-$(document).on('click', '#pwchk', function() {
-    chkPW($('#read_pw').val(), $('#resvname').val());
-})
-
 $(document).on('click', '#remov', function() {
-    delReserve($('#read_pw').val());
+    delResv($('#read_pw').val(),  $('#resvname').val());
 })
-
-$(document).on('keydown', '#read_pw', function() {
-    if (window.event.keyCode == 13) {
-        chkPW($('#read_pw').val());
-    }
-});

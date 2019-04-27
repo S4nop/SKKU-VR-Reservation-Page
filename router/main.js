@@ -17,8 +17,12 @@ module.exports = function(app, express, fs) {
     res.render('write');
   });
 
-  app.post('/chkResv', function(req, res) {
-    ctrl.chkResv(req, res);
+  app.post('/chkResv', async function(req, res) {
+    var rlt = await ctrl.chkResv(req, res, false);
+    if(rlt.result)
+      res.render('readResv', {"name": rlt.name, "num": rlt.num, "time": rlt.time});
+    else
+      res.render('reject');
   });
 
   app.get('/chkResv/:resvname', function(req, res) {
@@ -28,6 +32,10 @@ module.exports = function(app, express, fs) {
   app.get('/readResv', function(req, res) {
     res.render('readResv')
   });
+
+  app.post('/delResv', function(req, res) {
+    ctrl.chkResv(req, res, true);
+  })
 
   app.use('/static', express.static('static'));
 };

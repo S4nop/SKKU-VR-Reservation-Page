@@ -54,7 +54,7 @@ module.exports = {
       res.json(output);
     }
   },
-  chkResv: function(req, res) {
+  chkResv: function(req, res, onDel) {
     var tmpSplit, splitData;
     var json = new Object();
     var spliter = parse_Spliter(req.body['resvname'].split('$')[0]);
@@ -68,16 +68,27 @@ module.exports = {
         if (tmpSplit[i].startsWith(req.body['resvname'])) {
           
           splitData = tmpSplit[i].split('$');
+
           if (splitData[7] == req.body['pw']) {
             json.name = splitData[2];
             json.num = splitData[5];
             json.time = splitData[0] + '-' + splitData[1];
             json.result = true;
+
+            if(onDel) {
+                tmpSplit.splice(i, 1);
+                fs.writeFile(spliter + ".dat", tmpSplit.join('\n'), 'utf8', function(err) {
+                    if (err)
+                      res.status(500).send({ error: 'Something failed!' });
+                    res.json(json);
+                    return;
+                });
+            }
           } else {
             json.result = false;
           }
-          res.json(json);
-          return;
+
+          return json;
         }
       }
     } catch (e) {

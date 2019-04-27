@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const fs = require("fs")
 const PORT = 3000;
-
+const DATABASE = "/databases";
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
