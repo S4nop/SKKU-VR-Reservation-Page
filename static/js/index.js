@@ -185,7 +185,7 @@ $(document).on('click', '#write', function() {
 
             $('#pw').val('');
             console.log('successfully sent reservation data');
-            location.replace('#main-page');
+            location.replace('/');
         },
         error: function() {
             console.log("Error Occurred in AJAX");
@@ -199,4 +199,8 @@ $(document).on('click', '.resDiv', function() {
 
 $(document).on('click', '#remov', function() {
     delResv($('#read_pw').val(),  $('#resvname').val());
+})
+
+$(document).on('click', '#main-page', function() {
+    location.href = "/writeResv";
 })
